@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>¡Cielo, esto es para ti! 💙</title>
+    <style>
+        /* ESTILOS AZULES CÓSMICOS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #0a043c;
+            color: #e4f1fe;
+            overflow-x: hidden;
+            text-align: center;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+            padding: 0 10px;
+            word-wrap: break-word;
+        }
+
+        .section {
+            background: rgba(26, 42, 108, 0.6);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid #4facfe;
+            box-sizing: border-box;
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #00f2fe;
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+            line-height: 1.5;
+        }
+
+        button {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border: none;
+            color: #0a043c;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
+            width: 90%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #4facfe;
+        }
+
+        .hidden-message {
+            display: none;
+            background: rgba(0, 242, 254, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            animation: fadeIn 0.5s;
+            border: 1px dashed #4facfe;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .emoji-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        #music-toggle {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 242, 254, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            border: 1px solid #4facfe;
+            font-size: 1rem;
+        }
+
+        .urgent-message {
+            animation: pulse 2s infinite;
+            border: 2px solid #ff4d4d;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+        }
+
+        .quiz-option {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 90%;
+            max-width: 400px;
+            background: rgba(79, 172, 254, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #4facfe;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        .quiz-option:hover {
+            background: rgba(79, 172, 254, 0.3);
+        }
+
+        /* Media Queries para móviles */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+                margin-top: 20px;
+            }
+            
+            .section {
+                padding: 12px;
+                margin: 15px 0;
+            }
+            
+            .countdown {
+                font-size: 1rem;
+            }
+            
+            #final-btn {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo de partículas -->
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <h1>💙 CIELO: EL AZUL DEL CIELO NO SE COMPARA A TI 💙</h1>
+        
+        <!-- Countdown a tu cumple -->
+        <div class="section urgent-message">
+            <h2>⏳ CUENTA REGRESIVA PARA MI CUMPLEAÑOS</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 5px;"><strong>13 DE ABRIL 2025</strong></p>
+            <div class="countdown" id="countdown"></div>
+            <p><em>"Porque mi cumpleaños (el 13 de abril) no será especial sin ti..."</em> 😊</p>
+        </div>
+        
+        <!-- Sección URGENTE -->
+        <div class="section">
+            <h2>📌 RECUÉRDAME QUE...</h2>
+            <button id="urgent-btn">¡HAZ CLIC AQUÍ! (ES IMPORTANTE)</button>
+            <div id="urgent-message" class="hidden-message">
+                <p>💬 <strong>"Me prometiste contarme ese secreto que tanto me intriga... ¡No te hagas la desentendida!"</strong> 👀</p>
+            </div>
+        </div>
+        
+        <!-- Quiz del color azul -->
+        <div class="section">
+            <h2>¿POR QUÉ EL AZUL ES MI COLOR FAVORITO?</h2>
+            <div class="quiz-option" id="option1">Porque es el color del cielo... y tú eres mi Cielo 💙</div>
+            <div class="quiz-option" id="option2">Porque me recuerda al mar... y a ese día que casi nos ahogamos de risa</div>
+            <div class="quiz-option" id="option3">Porque es el color de tus ojos (mentira, ni los he visto 😆)</div>
+            <div id="quiz-result" class="hidden-message"></div>
+        </div>
+        
+        <!-- Botón final -->
+        <button id="final-btn">🌟 ¡DESCUBRE LA SORPRESA! 🌟</button>
+    </div>
+    
+    <!-- Efectos -->
+    <div class="emoji-rain" id="emoji-rain"></div>
+    
+    <!-- Música -->
+    <div id="music-toggle">🎵</div>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // ===== PARTICULAS =====
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#4facfe" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#4facfe", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" }
+                }
+            }
+        });
+
+        // ===== COUNTDOWN =====
+        function updateCountdown() {
+            const now = new Date();
+            const nextBirthday = new Date(2025, 3, 13); // 13 de abril 2025
+            const diff = nextBirthday - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerHTML = 
+                `${days} días ${hours} horas<br>${minutes} minutos ${seconds} segundos`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ===== MENSAJE URGENTE =====
+        document.getElementById('urgent-btn').addEventListener('click', function() {
+            const message = document.getElementById('urgent-message');
+            message.style.display = 'block';
+            // Efecto especial
+            this.style.background = 'linear-gradient(45deg, #ff4d4d, #ff7676)';
+        });
+
+        // ===== QUIZ DEL COLOR AZUL =====
+        document.getElementById('option1').addEventListener('click', function() {
+            document.getElementById('quiz-result').innerHTML = 
+                '💙 <strong>"¡Correcto! El azul es mi favorito porque cada vez que miro al cielo... pienso en ti, Cielo."</strong> 😊';
+            document.getElementById('quiz-result').style.display = 'block';
+            this.style.background = 'rgba(0, 255, 0, 0.2)';
+        });
+
+        document.getElementById('option2').addEventListener('click', function() {
+            document.getElementById('quiz-result').innerHTML = 
+                '🌊 <strong>"¡Casi! El mar es hermoso, pero no tanto como tú. La respuesta correcta es la primera 😉"</strong>';
+            document.getElementById('quiz-result').style.display = 'block';
+            this.style.background = 'rgba(255, 255, 0, 0.2)';
+        });
+
+        document.getElementById('option3').addEventListener('click', function() {
+            document.getElementById('quiz-result').innerHTML = 
+                '👀 <strong>"¡Ja ja! Ojalá pudiera ver tus ojos más seguido. Pero la respuesta correcta es la primera 💙"</strong>';
+            document.getElementById('quiz-result').style.display = 'block';
+            this.style.background = 'rgba(255, 0, 0, 0.2)';
+        });
+
+        // ===== BOTÓN FINAL =====
+        document.getElementById('final-btn').addEventListener('click', function() {
+            // Lluvia de emojis
+            const emojis = ['💙', '✨', '🎂', '🎁', '👑', '🌌'];
+            const container = document.getElementById('emoji-rain');
+            container.style.display = 'block';
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = Math.random() * 100 + 'vw';
+                    emoji.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    container.appendChild(emoji);
+                    
+                    setTimeout(() => {
+                        emoji.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+            
+            // Mensaje final
+            setTimeout(() => {
+                alert("🎉 ¡SORPRESA!\n\nEn realidad, solo quería decirte que...\n\n¡Eres la mejor amiga que podría tener! 💙\n\nPD: No olvides que mi cumple es el 13 de abril 😊");
+            }, 1000);
+        });
+
+        // ===== MÚSICA =====
+        const musicToggle = document.getElementById('music-toggle');
+        const bgMusic = document.getElementById('bg-music');
+        
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicToggle.textContent = '🔊';
+            } else {
+                bgMusic.pause();
+                musicToggle.textContent = '🔇';
+            }
+        });
+    </script>
+</body>
+</html>
